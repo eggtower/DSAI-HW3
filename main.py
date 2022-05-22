@@ -64,18 +64,13 @@ def rule(pdGen, pdCon, last_date):
             for j in range(int(gap)):
                 ans.append([str(last_date), "buy", 2.3, 1])
         elif (gap < 0):
-            for j in range(int(gap)):
-                ans.append([str(last_date), "buy", 2.3, 1])
-            ans.append([last_date, "sell", 1.5, 1])
+            ans.append([str(last_date), "sell", 1.5, 1])
     return ans
 
 
 if __name__ == "__main__":
     args = config()
 
-    gpus = tf.config.experimental.list_physical_devices(device_type='GPU')
-    physical_devices = tf.config.experimental.set_visible_devices(devices=gpus[0], device_type='GPU')
-    
     gen, gScalar, con, cScalar, last_date = getData(config().generation, config().consumption)
     pdGen, pdCon = test_model(gen, con)
     
